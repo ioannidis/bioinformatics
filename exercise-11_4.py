@@ -50,22 +50,22 @@ for i in range(len(observation)):
     else:
         if (v_best_path_matrix[i - 1] == 'a'):
             temp_scores.append(
-                v_max_score_matrix[i - 1] + transition_matrix_log[states.index(v_best_path_matrix[i - 1])][0] +
+                v_max_score_matrix[i - 1] + transition_matrix_log[states.index('a')][0] +
                 emission_matrix_log[emissions.index(observation[i])][0])
             temp_scores.append(
-                v_max_score_matrix[i - 1] + transition_matrix_log[states.index(v_best_path_matrix[i - 1])][1] +
+                v_max_score_matrix[i - 1] + transition_matrix_log[states.index('a')][1] +
                 emission_matrix_log[emissions.index(observation[i])][1])
         else :
             temp_scores.append(
-                v_max_score_matrix[i - 1] + transition_matrix_log[1][states.index(v_best_path_matrix[i - 1])] +
+                v_max_score_matrix[i - 1] + transition_matrix_log[1][states.index('b')] +
                 emission_matrix_log[emissions.index(observation[i])][0])
             temp_scores.append(
-                v_max_score_matrix[i - 1] + transition_matrix_log[1][states.index(v_best_path_matrix[i - 1])] +
+                v_max_score_matrix[i - 1] + transition_matrix_log[1][states.index('b')] +
                 emission_matrix_log[emissions.index(observation[i])][1])
 
     v_max_score_matrix.append(max(temp_scores))
     v_best_path_matrix.append(states[temp_scores.index(max(temp_scores))])
 
-print("The best path for the ", observation, " sequence is:")
+print("The best path for the sequence ", observation, " is:")
 print(v_best_path_matrix)
 
