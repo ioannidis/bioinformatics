@@ -1,6 +1,7 @@
 import numpy as np
 import math
 
+# Starting probabilities
 start_prob = [0.5, 0.5]
 
 # Transition matrix
@@ -22,16 +23,13 @@ emission_matrix = [[0.4, 0.20],
 emissions = ['A', 'G', 'T', 'C']
 states = ['a', 'b']
 
+# Observation sequence
 observation = 'GGCT'
 
+# Transform probability matrices to log-scores
 transition_matrix_log = np.log(transition_matrix)
-print(transition_matrix_log)
-
 emission_matrix_log = np.log(emission_matrix)
-print(emission_matrix_log)
-
 start_prob_log = np.log(start_prob)
-print(start_prob_log)
 
 # Holds the max score of each step
 v_max_score_matrix = []
@@ -40,26 +38,12 @@ v_max_score_matrix = []
 v_best_path_matrix = []
 
 
-# v11 = start_prob_log[0] + emission_matrix_log[emissions.index('G')][0]
-# v12 = start_prob_log[1] + emission_matrix_log[emissions.index('G')][1]
-
-# v_max_score_matrix.append(max(v11, v12))
-# v_best_path_matrix.append(1)
-#
-# a= [v11, v12]
-#
-# print(42342342342)
-# print(a)
-# print(a.index(max(a)))
-
-
-# print("v_max_score_matrix")
-# print(v_max_score_matrix)
-# print("v_best_path_matrix")
-# print(v_best_path_matrix)
-
 for i in range(len(observation)):
+    # Holed the scores for each step
     temp_scores = []
+
+    # Calculate the score at first step and then
+    # use dynamic programming to calculate the other steps
     if (i == 0):
         temp_scores.append(start_prob_log[0] + emission_matrix_log[emissions.index(observation[i])][0])
         temp_scores.append(start_prob_log[1] + emission_matrix_log[emissions.index(observation[i])][1])
@@ -79,16 +63,8 @@ for i in range(len(observation)):
                 v_max_score_matrix[i - 1] + transition_matrix_log[1][states.index(v_best_path_matrix[i - 1])] +
                 emission_matrix_log[emissions.index(observation[i])][1])
 
-
-    print("temp scores ====================================")
-    print(temp_scores)
     v_max_score_matrix.append(max(temp_scores))
     v_best_path_matrix.append(states[temp_scores.index(max(temp_scores))])
-
-print("v_max_score_matrix")
-print(v_max_score_matrix)
-print("v_best_path_matrix")
-print(v_best_path_matrix)
 
 print("The best path for the ", observation, " sequence is:")
 print(v_best_path_matrix)
