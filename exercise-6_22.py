@@ -1,3 +1,10 @@
+#============ CS UNIPI =============#
+#       BioInformatics 2018-19      #
+#===================================#
+#   P16036 - Ioannidis Panagiotis   #
+#   P16112 - Paravantis Athanasios  #
+#===================================#
+
 import numpy as np
 
 
@@ -10,8 +17,6 @@ def lcs(v, w):
 
     for i in range(n):
         for j in range(m):
-            print(f'Comparing {v[i]} with {w[j]}')
-
             if v[i] == w[j]:
                 s[i][j] = s[i - 1][j - 1] + 1
             else:
