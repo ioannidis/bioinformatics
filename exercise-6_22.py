@@ -32,12 +32,24 @@ def lcs(v, w):
 
 
 def printLcs(b, v, i, j):
-    pass
+    if i == 0 or j == 0:
+        return
+
+    if b[i][j] == '\u2196':
+        printLcs(b, v, i-1, j-1)
+        print(v[i])
+    else:
+        if b[i][j] == '\u2191':
+            printLcs(b, v, i-1, j)
+        else:
+            printLcs(b, v, i, j-1)
 
 
 if __name__ == '__main__':
     v = 'TGCATA'
     w = 'ATCTGAT'
+    n = len(v)
+    m = len(w)
 
     print('Sequence v:')
     print(v)
@@ -59,3 +71,6 @@ if __name__ == '__main__':
     print('Matrix b:')
     for row in b:
         print(row)
+
+    print()
+    # printLcs(b, v, n, m)
