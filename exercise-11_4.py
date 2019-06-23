@@ -1,5 +1,11 @@
+#============ CS UNIPI =============#
+#       BioInformatics 2018-19      #
+#===================================#
+#   P16036 - Ioannidis Panagiotis   #
+#   P16112 - Paravantis Athanasios  #
+#===================================#
+
 import numpy as np
-import math
 
 # Starting probabilities
 start_prob = [0.5, 0.5]
@@ -27,9 +33,9 @@ states = ['a', 'b']
 observation = 'GGCT'
 
 # Transform probability matrices to log-scores
-transition_matrix_log = np.log(transition_matrix)
-emission_matrix_log = np.log(emission_matrix)
-start_prob_log = np.log(start_prob)
+transition_matrix_log = np.log2(transition_matrix)
+emission_matrix_log = np.log2(emission_matrix)
+start_prob_log = np.log2(start_prob)
 
 # Holds the max score of each step
 v_max_score_matrix = []
