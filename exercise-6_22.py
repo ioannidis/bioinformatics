@@ -1,9 +1,9 @@
-#============ CS UNIPI =============#
+# ============ CS UNIPI =============#
 #       BioInformatics 2018-19      #
-#===================================#
+# ===================================#
 #   P16036 - Ioannidis Panagiotis   #
 #   P16112 - Paravantis Athanasios  #
-#===================================#
+# ===================================#
 
 import numpy as np
 
@@ -13,11 +13,19 @@ def lcs(v, w):
     m = len(w)
 
     s = [[0 for j in range(m)] for i in range(n)]
-    b = [['' for j in range(m)] for i in range(n)]
+    b = [[' ' for j in range(m)] for i in range(n)]
 
-    for i in range(n):
-        for j in range(m):
-            if v[i] == w[j]:
+    v_index = 0
+
+    for i in range(1, n):
+        w_index = 0
+        for j in range(1, m):
+            v_token = v[v_index]
+            w_token = w[w_index]
+
+            # print(f'{v[v_index]} ? {w[w_index]}')
+            print(f'{i}, {j}')
+            if v_token == w_token:
                 s[i][j] = s[i - 1][j - 1] + 1
             else:
                 s[i][j] = max(s[i - 1][j], s[i][j - 1])
@@ -28,6 +36,10 @@ def lcs(v, w):
                 b[i][j] = '\u2190'
             elif s[i][j] == s[i - 1][j - 1] + 1:
                 b[i][j] = '\u2196'
+
+            w_index += 1
+        print()
+        v_index += 1
     return s, b
 
 
@@ -36,20 +48,18 @@ def printLcs(b, v, i, j):
         return
 
     if b[i][j] == '\u2196':
-        printLcs(b, v, i-1, j-1)
+        printLcs(b, v, i - 1, j - 1)
         print(v[i])
     else:
         if b[i][j] == '\u2191':
-            printLcs(b, v, i-1, j)
+            printLcs(b, v, i - 1, j)
         else:
-            printLcs(b, v, i, j-1)
+            printLcs(b, v, i, j - 1)
 
 
 if __name__ == '__main__':
     v = 'TGCATA'
     w = 'ATCTGAT'
-    n = len(v)
-    m = len(w)
 
     print('Sequence v:')
     print(v)
@@ -63,8 +73,21 @@ if __name__ == '__main__':
 
     s, b = lcs(v, w)
     print('Matrix s:')
+
+    print('      ', end='')
+    for char in v:
+        print(char, end='  ')
+    print()
+
+    w_chars = [char for char in w]
+    idx = -1
     for row in s:
+        if idx > -1:
+            print(w_chars[idx] + ' ', end='')
+        else:
+            print('  ', end='')
         print(row)
+        idx += 1
 
     print()
 
@@ -73,4 +96,4 @@ if __name__ == '__main__':
         print(row)
 
     print()
-    # printLcs(b, v, n, m)
+    # print(printLcs(b, v, n, m))
