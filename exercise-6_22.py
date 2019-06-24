@@ -1,75 +1,73 @@
-# ============ CS UNIPI =============#
+#============ CS UNIPI =============#
 #       BioInformatics 2018-19      #
-# ===================================#
+#===================================#
 #   P16036 - Ioannidis Panagiotis   #
 #   P16112 - Paravantis Athanasios  #
-# ===================================#
-
-import numpy as np
+#===================================#
 
 
 def lcs(v, w):
-    n = len(v)
-    m = len(w)
+    n = len(w) + 1
+    m = len(v) + 1
 
     s = [[0 for j in range(m)] for i in range(n)]
     b = [[' ' for j in range(m)] for i in range(n)]
 
-    v_index = 0
-
     for i in range(1, n):
-        w_index = 0
         for j in range(1, m):
-            v_token = v[v_index]
-            w_token = w[w_index]
+            v_token = v[j - 1]
+            w_token = w[i - 1]
 
-            # print(f'{v[v_index]} ? {w[w_index]}')
-            print(f'{i}, {j}')
             if v_token == w_token:
                 s[i][j] = s[i - 1][j - 1] + 1
             else:
                 s[i][j] = max(s[i - 1][j], s[i][j - 1])
 
+    for i in range(1, n):
+        for j in range(1, m):
             if s[i][j] == s[i - 1][j]:
-                b[i][j] = '\u2191'
+                b[i][j] = f'\u2191'
             elif s[i][j] == s[i][j - 1]:
-                b[i][j] = '\u2190'
+                b[i][j] = f'\u2190'
             elif s[i][j] == s[i - 1][j - 1] + 1:
-                b[i][j] = '\u2196'
-
-            w_index += 1
-        print()
-        v_index += 1
+                b[i][j] = f'\u2196'
     return s, b
 
 
-def printLcs(b, v, i, j):
+def getLCS(b, v, i, j, seq=[]):
     if i == 0 or j == 0:
         return
 
     if b[i][j] == '\u2196':
-        printLcs(b, v, i - 1, j - 1)
-        print(v[i])
+        getLCS(b, v, i - 1, j - 1, seq)
+        seq.append(v[j - 1])
+    elif b[i][j] == '\u2191':
+        getLCS(b, v, i - 1, j, seq)
     else:
-        if b[i][j] == '\u2191':
-            printLcs(b, v, i - 1, j)
-        else:
-            printLcs(b, v, i, j - 1)
+        getLCS(b, v, i, j - 1, seq)
+
+    return seq
 
 
 if __name__ == '__main__':
-    v = 'TGCATA'
-    w = 'ATCTGAT'
+    v = 'GTAGGCTTAAGGTTA'
+    w = 'TAGATA'
+
+    # Print sequence v
 
     print('Sequence v:')
     print(v)
 
     print()
 
+    # Print sequence w
+
     print('Sequence w:')
     print(w)
 
     print()
+
+    # Print s matrix
 
     s, b = lcs(v, w)
     print('Matrix s:')
@@ -91,9 +89,25 @@ if __name__ == '__main__':
 
     print()
 
+    # Print b matrix
+
     print('Matrix b:')
     for row in b:
         print(row)
 
     print()
-    # print(printLcs(b, v, n, m))
+
+    # Print LCS result
+
+    n = len(w)
+    m = len(v)
+    lcs = getLCS(b, v, n, m)
+    token = ''.join(lcs)
+    print(f'Result: {token}')
+
+    # Print distance
+
+    print()
+
+    distance = n + m - (2 * s[-1][-1])
+    print(f'Distance: {distance}')
