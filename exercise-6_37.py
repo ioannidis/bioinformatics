@@ -4,26 +4,16 @@
 #   P16036 - Ioannidis Panagiotis   #
 #   P16112 - Paravantis Athanasios  #
 # ===================================#
+import re
+
 
 def restore(seq):
-    seq = [char for char in seq]
-    idx_removes = []
+    seq = re.sub('A{2,5}', 'A', seq)
+    seq = re.sub('C{2,10}', 'C', seq)
+    seq = re.sub('G+', 'G', seq)
+    seq = re.sub('T+', 'T', seq)
 
-    prev = ''
-    for idx, char in enumerate(seq):
-        if len(prev) > 0 and char == prev:
-            idx_removes.append(idx)
-        prev = char
-
-    result = []
-
-    for idx, char in enumerate(seq):
-        if idx in idx_removes:
-            continue
-        else:
-            result.append(char)
-
-    return ''.join(result)
+    return seq
 
 
 if __name__ == '__main__':

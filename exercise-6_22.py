@@ -12,45 +12,45 @@ from difflib import get_close_matches
 from data import Data
 
 
-def lcs(v, w):
-    n = len(w) + 1
-    m = len(v) + 1
-
-    s = [[0 for j in range(m)] for i in range(n)]
-    b = [[' ' for j in range(m)] for i in range(n)]
-
-    for i in range(1, n):
-        for j in range(1, m):
-            v_token = v[j - 1]
-            w_token = w[i - 1]
-
-            if v_token == w_token:
-                s[i][j] = s[i - 1][j - 1] + 1
-            else:
-                s[i][j] = max(s[i - 1][j], s[i][j - 1])
-
-            if s[i][j] == s[i - 1][j]:
-                b[i][j] = f'\u2191'
-            elif s[i][j] == s[i][j - 1]:
-                b[i][j] = f'\u2190'
-            elif s[i][j] == s[i - 1][j - 1] + 1:
-                b[i][j] = f'\u2196'
-    return s, b
-
-
-def getLCS(b, v, i, j, seq=[]):
-    if i == 0 or j == 0:
-        return
-
-    if b[i][j] == '\u2196':
-        getLCS(b, v, i - 1, j - 1, seq)
-        seq.append(v[j - 1])
-    elif b[i][j] == '\u2191':
-        getLCS(b, v, i - 1, j, seq)
-    else:
-        getLCS(b, v, i, j - 1, seq)
-
-    return seq
+# def lcs(v, w):
+#     n = len(w) + 1
+#     m = len(v) + 1
+#
+#     s = [[0 for j in range(m)] for i in range(n)]
+#     b = [[' ' for j in range(m)] for i in range(n)]
+#
+#     for i in range(1, n):
+#         for j in range(1, m):
+#             v_token = v[j - 1]
+#             w_token = w[i - 1]
+#
+#             if v_token == w_token:
+#                 s[i][j] = s[i - 1][j - 1] + 1
+#             else:
+#                 s[i][j] = max(s[i - 1][j], s[i][j - 1])
+#
+#             if s[i][j] == s[i - 1][j]:
+#                 b[i][j] = f'\u2191'
+#             elif s[i][j] == s[i][j - 1]:
+#                 b[i][j] = f'\u2190'
+#             elif s[i][j] == s[i - 1][j - 1] + 1:
+#                 b[i][j] = f'\u2196'
+#     return s, b
+#
+#
+# def getLCS(b, v, i, j, seq=[]):
+#     if i == 0 or j == 0:
+#         return
+#
+#     if b[i][j] == '\u2196':
+#         getLCS(b, v, i - 1, j - 1, seq)
+#         seq.append(v[j - 1])
+#     elif b[i][j] == '\u2191':
+#         getLCS(b, v, i - 1, j, seq)
+#     else:
+#         getLCS(b, v, i, j - 1, seq)
+#
+#     return seq
 
 
 if __name__ == '__main__':
