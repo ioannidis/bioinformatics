@@ -19,6 +19,8 @@ if __name__ == '__main__':
     print()
 
     k = input('Enter value of k: ')
+    print()
+
     k = float(k)
 
     aligner = Align.PairwiseAligner()
@@ -44,8 +46,8 @@ if __name__ == '__main__':
 
     if -score > k:
         print(f'Value of k={k} is greater than the value of additions/deletions={-score}')
+    else:
 
-    print(f'Alignments based on {aligner.algorithm}:')
-
-    for alignment in alignments:
-        print(alignment)
+        print(f'Alignments based on {aligner.algorithm}:')
+        for alignment in alignments:
+            print(alignment)
