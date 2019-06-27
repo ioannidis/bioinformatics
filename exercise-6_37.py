@@ -6,17 +6,8 @@
 # ===================================#
 
 from Bio import Align
-from Bio.Alphabet import IUPAC
-from Bio.Seq import Seq
 
 if __name__ == '__main__':
-    seq = Seq('TTSAGESADPVTTTVENYGGETQIQRRQHTDVSFIMDRFVKVT'
-              'PQNQINILDLMQVPSHTLVGGLLRASTYYFSDLEIAVKHEGDL'
-              'TWVPNGAPEKALDNTTNPTAYHKAPLTRLALPYTAPHRVLATV'
-              'YNGECRYSRNAVPNLRGDLQVLAQKVARTLPTSFNYGAIKATR'
-              'VTELLYRMKRAETYCPRPLLAIHPTEARHKQKIVAPVKQTL', IUPAC.ambiguous_dna)
-
-    print(seq)
     v = 'AGTACT'
     w = ['ATAGAC', 'CTGATA', 'ATGGCC', 'ACGGGT']
 
