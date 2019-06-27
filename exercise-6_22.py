@@ -4,12 +4,11 @@
 #   P16036 - Ioannidis Panagiotis   #
 #   P16112 - Paravantis Athanasios  #
 # ===================================#
+
 from Bio.Seq import Seq
 from Bio import Align
-from data import Data
 
 if __name__ == '__main__':
-    data = Data()
     v = 'ΤΑΤΑΤΑ'
     w = 'ΑΑΑΤΤΤ'
 
@@ -66,7 +65,7 @@ if __name__ == '__main__':
                 v_seq_max = v_seq
                 w_seq_max = w_seq
                 score = new_score
-                scores.append(score)
+            scores.append(score)
 
     print(f'Calculated scores: {scores}')
     print()
