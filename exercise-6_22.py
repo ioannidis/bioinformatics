@@ -9,8 +9,8 @@ from Bio.Seq import Seq
 from Bio import Align
 
 if __name__ == '__main__':
-    v = 'ΤΑΤΑΤΑ'
-    w = 'ΑΑΑΤΤΤ'
+    v = 'TATATA'
+    w = 'AAATTT'
 
     print(f'Sequence v:')
     print(v)
