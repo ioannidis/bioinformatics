@@ -4,17 +4,33 @@
 #   P16036 - Ioannidis Panagiotis   #
 #   P16112 - Paravantis Athanasios  #
 # ===================================#
+import random
 
 from Bio import Align
+from Bio.Alphabet import IUPAC
+from Bio.Seq import Seq
+
+from data import Data
+from textwrap import wrap
 
 if __name__ == '__main__':
-    v = 'AGTACT'
-    w = ['ATAGAC', 'CTGATA', 'ATGGCC', 'ACGGGT']
+    data = Data()
+    aa_seq = data.load_data('1bbt.txt')
 
-    print(f'Sequence v:')
+    print('1BBT amino acid sequence:')
+    print(aa_seq)
+    print()
+
+    v = data.load_data('lysozyme.txt')[:20]
+    w_full = data.load_data('a_lactalbumin.txt')[:50]
+
+    split = 10
+    w = wrap(w_full, split)
+
+    print(f'Sequence v - lysozime - {len(v)} chars:')
     print(v)
     print()
-    print(f'Sequences w:')
+    print(f'Sequence w - lactalbumin alpha - {len(w)} splits of {split} chars:')
     print(w)
     print()
 
@@ -75,9 +91,8 @@ if __name__ == '__main__':
     print(score)
     print()
 
+    print(f'Alignment based on {aligner.algorithm}:')
+
     alignments = list(aligner.align(v, w_seq_max))
-
-    print(f'Alignments based on {aligner.algorithm}:')
-
-    for alignment in alignments:
-        print(alignment)
+    alignment = random.choice(alignments)
+    print(alignment)

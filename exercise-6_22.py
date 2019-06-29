@@ -4,18 +4,22 @@
 #   P16036 - Ioannidis Panagiotis   #
 #   P16112 - Paravantis Athanasios  #
 # ===================================#
+import random
 
 from Bio.Seq import Seq
 from Bio import Align
 
-if __name__ == '__main__':
-    v = 'TATATA'
-    w = 'AAATTT'
+from data import Data
 
-    print(f'Sequence v:')
+if __name__ == '__main__':
+    data = Data()
+    v = data.load_data('lysozyme.txt')[:50]
+    w = data.load_data('a_lactalbumin.txt')[:50]
+
+    print(f'Sequence v - lysozime - {len(v)} chars:')
     print(v)
     print()
-    print(f'Sequence w:')
+    print(f'Sequence w - lactalbumin alpha - {len(w)} chars:')
     print(w)
     print()
 
@@ -81,8 +85,7 @@ if __name__ == '__main__':
     print()
 
     alignments = list(aligner.align(v_seq_max, w_seq_max))
+    alignment = random.choice(alignments)
 
-    print(f'Alignments based on {aligner.algorithm}:')
-
-    for alignment in alignments:
-        print(alignment)
+    print(f'Alignment based on {aligner.algorithm}:')
+    print(alignment)
