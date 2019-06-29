@@ -75,3 +75,6 @@ for i in range(len(observation)):
 print("The best path for the sequence ", observation, " is:")
 print(v_best_path_matrix)
 
+print("\nThe best score for each node ", observation, " is:")
+print(v_max_score_matrix)
+

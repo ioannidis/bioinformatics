@@ -69,18 +69,16 @@ while True:
         # First player move
         p1_move = first_player(pointer_pos_seq_A, pointer_pos_seq_B)
         # Update pointer values
-        pointer_pos_seq_A = p1_move[0]
-        pointer_pos_seq_B = p1_move[1]
+        pointer_pos_seq_A, pointer_pos_seq_B = p1_move
     else:
-        print("Player 1 wins!")
+        print("=== First player wins! ===")
         break
 
     if (pointer_pos_seq_A >= 2 and pointer_pos_seq_B >= 1) or (pointer_pos_seq_A >= 1 and pointer_pos_seq_B >= 2):
         # Second player move
         p2_move = second_player(pointer_pos_seq_A, pointer_pos_seq_B)
         # Update pointer values
-        pointer_pos_seq_A = p2_move[0]
-        pointer_pos_seq_B = p2_move[1]
+        pointer_pos_seq_A, pointer_pos_seq_B = p2_move
     else:
-        print("Player 2 wins!")
+        print("### Second player wins! ###")
         break

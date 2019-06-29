@@ -33,7 +33,8 @@ lysozyme_sequence = Data.load_data('lysozyme.txt')
 pointer_pos = len(lysozyme_sequence) - 1
 
 
-if not lysozyme_sequence:  # if there are no nucleotides
+# Check if sequence is empty
+if not lysozyme_sequence:
     print('Sequence is empty!')
 else:
     while True:
