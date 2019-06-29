@@ -6,6 +6,7 @@
 #===================================#
 
 import numpy as np
+import copy
 
 # Transition matrix
 # [[p(START|D1), p(D1|D1) , p(D2|D1) , p(END|D1) ],
@@ -58,27 +59,28 @@ for i in observation[1:]:
     counter += 1
 
 # Viterbi backtracking
-best_sequences = ['']
+best_sequences = [[]]
 if viterbi_matrix[0][states_len] > viterbi_matrix[1][states_len]:
     best_index = [0]
-    best_sequences[0] = states[0]
+    best_sequences[0].append(states[0])
 else:
     best_index = [1]
-    best_sequences[0] = states[1]
+    best_sequences[0].append(states[1])
 
 for i in range(backtracking_matrix.shape[1] - 1, 0, -1):
     for j in range(len(best_sequences)):
         if backtracking_matrix[best_index[j], i] != 2:
-            best_sequences[j] = states[backtracking_matrix[best_index[j]][i]] + '-' + best_sequences[j]
+            best_sequences[j].append(states[backtracking_matrix[best_index[j]][i]])
             best_index[j] = backtracking_matrix[best_index[j]][i]
         else:
-            best_sequences.append(best_sequences[j])
+            best_sequences.append(copy.deepcopy(best_sequences[j]))
             best_index.append(best_index[j])
-            best_sequences[j] = states[0] + '-' + best_sequences[j]
-            best_sequences[j+1] = states[1] + '-' + best_sequences[j+1]
+
+            best_sequences[j].append(states[0])
+            best_sequences[j+1].append(states[1])
+
             best_index[j] = backtracking_matrix[0][i - 1]
             best_index[j+1] = backtracking_matrix[1][i - 1]
-
 
 # Print viterbi matrix
 print('The viterbi matrix is:')
@@ -86,11 +88,12 @@ print(viterbi_matrix)
 
 # Print best sequences
 print('\nThe best sequences are:')
-for seq in best_sequences:
-    print(seq)
+for seq in np.flip(best_sequences, axis=1):
+    print('START-', '-'.join(str(x) for x in seq), '-END')
+
 
 # Print best score
 best_index = 0 if viterbi_matrix[0][states_len] > viterbi_matrix[1][states_len] else 1
-print('\nThe best score is:',str(viterbi_matrix[best_index][counter - 1] + np.log2(transition_matrix[best_index + 1][3])))
+print('\nThe best score is:', str(viterbi_matrix[best_index][counter - 1] + np.log2(transition_matrix[best_index + 1][3])))
 
 
