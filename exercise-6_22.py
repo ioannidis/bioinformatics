@@ -1,14 +1,13 @@
 # ============ CS UNIPI =============#
-#       BioInformatics 2018-19      #
+#       BioInformatics 2018-19       #
 # ===================================#
-#   P16036 - Ioannidis Panagiotis   #
-#   P16112 - Paravantis Athanasios  #
+#   P16036 - Ioannidis Panagiotis    #
+#   P16112 - Paravantis Athanasios   #
 # ===================================#
-import random
 
+import random
 from Bio.Seq import Seq
 from Bio import Align
-
 from data import Data
 
 if __name__ == '__main__':

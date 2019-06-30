@@ -1,36 +1,37 @@
 # ============ CS UNIPI =============#
-#       BioInformatics 2018-19      #
+#       BioInformatics 2018-19       #
 # ===================================#
-#   P16036 - Ioannidis Panagiotis   #
-#   P16112 - Paravantis Athanasios  #
+#   P16036 - Ioannidis Panagiotis    #
+#   P16112 - Paravantis Athanasios   #
 # ===================================#
+
 import random
-
 from Bio import Align
-from Bio.Alphabet import IUPAC
-from Bio.Seq import Seq
-
-from data import Data
 from textwrap import wrap
+from data import Data
 
 if __name__ == '__main__':
     data = Data()
-    aa_seq = data.load_data('1bbt.txt')
+    aa_seq = data.load_data('1bbt.aa.txt')
+    dna_seq = data.load_data('1bbt.dna.txt')
 
     print('1BBT amino acid sequence:')
     print(aa_seq)
     print()
+    print('1BBT dna sequence:')
+    print(dna_seq)
+    print()
 
-    v = data.load_data('lysozyme.txt')[:20]
-    w_full = data.load_data('a_lactalbumin.txt')[:50]
+    v = dna_seq[:20]
+    w_full = dna_seq[21:]
 
     split = 10
     w = wrap(w_full, split)
 
-    print(f'Sequence v - lysozime - {len(v)} chars:')
+    print(f'Sequence v - 1BBT - {len(v)} chars:')
     print(v)
     print()
-    print(f'Sequence w - lactalbumin alpha - {len(w)} splits of {split} chars:')
+    print(f'Sequence w - 1BBT - {len(w)} splits of {split} chars:')
     print(w)
     print()
 
