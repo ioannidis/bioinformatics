@@ -31,8 +31,8 @@ if __name__ == '__main__':
     v_seqs = [v[i:] for i in range(len(v) - 1, 0, -1)]
     w_seqs = [w[:j] for j in range(1, len(w), 1)]
 
-    print(f'Found {len(v_seqs)} subsequences of v: {v_seqs}')
-    print(f'Found {len(w_seqs)} subsequences of w: {w_seqs}')
+    print(f'Found {len(v_seqs)} subsequences of v.')
+    print(f'Found {len(w_seqs)} subsequences of w.')
     print()
 
     aligner = Align.PairwiseAligner()
@@ -70,7 +70,7 @@ if __name__ == '__main__':
                 score = new_score
             scores.append(score)
 
-    print(f'Calculated scores: {scores}')
+    print(f'Calculated {len(scores)} scores.')
     print()
 
     print('Best subsequence v:')

@@ -20,11 +20,14 @@ if __name__ == '__main__':
     print(f'Sequence w - lactalbumin alpha - {len(w)} chars:')
     print(w)
     print()
+    k = ''
 
-    k = input('Enter value of k: ')
-    print()
-
-    k = float(k)
+    while not isinstance(k, (int, float)):
+        try:
+            k = int(input('Enter the maximum number of allowed additions/deletions k: '))
+        except ValueError:
+            print('Please enter a valid integer for k.')
+        print()
 
     aligner = Align.PairwiseAligner()
     aligner.mode = 'global'
@@ -43,12 +46,12 @@ if __name__ == '__main__':
     aligner.target_right_open_gap_score = -1
     aligner.target_right_extend_gap_score = -1
 
-    score = abs(aligner.score(v, w))
+    score = abs(int(aligner.score(v, w)))
 
     if score > k:
-        print(f'Alignment stopped because k={k} < score={score}.')
+        print(f'Alignment stopped because k={k} < additions/deletions={score}.')
     else:
-        print(f'Aligning sequences since k={k} < score={score}.')
+        print(f'Aligning sequences since k={k} >= additions/deletions={score}.')
         print()
         print(f'Alignment based on {aligner.algorithm}:')
 

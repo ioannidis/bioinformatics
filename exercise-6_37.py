@@ -47,7 +47,7 @@ if __name__ == '__main__':
             seq = f'{w[i]}{w[j]}'
             w_comb.append(seq)
 
-    print(f'Found {len(w_comb)} combinations of w: {w_comb}')
+    print(f'Found {len(w_comb)} combinations of w.')
     print()
 
     aligner = Align.PairwiseAligner()
@@ -82,7 +82,7 @@ if __name__ == '__main__':
             score = new_score
         scores.append(score)
 
-    print(f'Calculated scores: {scores}')
+    print(f'Calculated {len(scores)} scores.')
     print()
 
     print('Best combination of w:')
